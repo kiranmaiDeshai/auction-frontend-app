@@ -1,0 +1,62 @@
+<div class="container p-0">
+    <div class="whitebox mt-3">
+        <p class="description px-3">Select a product and click on GET to load the product details and bids</p>
+
+        <div class="d-flex align-items-center mb-3">
+            <label class="col-1 col-form-label">Product</label>
+            <div class="col-5 col-md-2">
+                <select class="form-control" (change)="onProductChange($event.target.value)">
+                    <option value="0">Select Product</option>
+                    <option *ngFor="let product of products;let i = index" [value]="product.id">{{product.name}}
+                    </option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" (click)="fetchProdDetails()">GET</button>
+        </div>
+
+        <div class="border-top py-2">
+            <div class="d-flex align-items-center mb-2">
+                <label class="col-4 col-form-label">Product Name</label>
+                <span class="col-8 label-value">{{productDetails.product ? productDetails.product.name : ''}}</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <label class="col-4 col-form-label">Short Description</label>
+                <span class="col-8 label-value">{{productDetails.product ? productDetails.product.shortDescription :
+                    ''}}</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <label class="col-4 col-form-label">Detailed Description</label>
+                <span class="col-8 label-value">{{productDetails.product ? productDetails.product.detailedDescription :
+                    ''}}</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <label class="col-4 col-form-label">Category</label>
+                <span class="col-8 label-value">{{productDetails.product ? productDetails.product.category : ''}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="whitebox mt-3 pb-3">
+        <div class="card-title text-primary">Bids</div>
+        <div class="p-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Bid Amount</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Mobile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let bid of productDetails.bids">
+                        <td>{{bid.amount}}</td>
+                        <td>{{bid.firstName + '' + bid.lastName}}</td>
+                        <td>{{bid.email}}</td>
+                        <td>{{bid.phone}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
